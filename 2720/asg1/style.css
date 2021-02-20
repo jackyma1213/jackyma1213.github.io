@@ -1,0 +1,77 @@
+table td{
+    height: 80px;
+}
+
+section, #useful-link>li{
+    background-color: #f7f7f7;
+}
+
+header{
+    font-family: Comic Sans MS;
+}
+
+h3{
+    font-family: Impact;
+}
+
+p{
+    font-family: Trebuchet MS;
+    font-size: 20px
+}
+
+#special-nav{
+    top:3.5rem;
+    display:none;
+}
+
+.test [class*="col-"] {
+    padding: 15px;
+    background-color: #f1f1f1;
+    border: 1px solid #D8D8D8;
+}
+
+.featurepicpc{
+    width:80%;
+}
+
+.blockquote-footer{
+    font-size: 10px;
+}
+
+@media (max-width: 768px){
+    .taskcontent{
+        display:none;
+    }
+
+    .navbar-nav, #special-btn{
+        font-size:14px !important;
+    }
+
+    #special-nav{
+        top:3.3rem;
+    }
+
+    p{
+        font-size: 16px;
+    }
+
+    #comments p{
+        font-size: 12px;
+    }
+
+    h6{
+        font-size: .8rem !important;
+    }
+
+    .featurepicmobile{
+        width:60%;
+    }
+
+    .featurepicpc{
+        width:100%;
+    }
+
+    .blockquote-footer{
+        font-size: 7px;
+    }
+}

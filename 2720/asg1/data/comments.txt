@@ -1,0 +1,16 @@
+<div class="d-flex border-bottom"> 
+                        <div class="flex-shrink">
+                        <svg height="100" width="100">
+                            <circle cx="50" cy="50" r="40" fill="green">
+                        </circle></svg>
+                        </div> 
+                        <div class="flex-grow-1">
+                        <h6>test@testing.com</h6>
+                        <p>Good Good</p>
+                        <blockquote class="blockquote">
+                        <footer class="blockquote-footer">
+                            <div class="d-flex flex-column"><div>Browser information:Mozilla</div><div>Platform: Win32</div><div>Date & Time: Sat Feb 20 2021 23:26:17 GMT+0800 (香港標準時間)</div><div>IP: 221.124.59.188</div><div>Location: Hong Kong</div></div>
+                        </footer>     
+                        </blockquote>
+                        </div>
+                    </div>
