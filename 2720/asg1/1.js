@@ -34,30 +34,30 @@ function task1(){
 }
 
 //Task2
-async function task2(){
+// async function task2(){
     
-    let content = "";
+//     let content = "";
 
-    await fetch('/data/hobbies.txt')
-    .then(res => res.text())
-    .then(txt => {content = txt;})
+//     await fetch('/data/hobbies.txt')
+//     .then(res => res.text())
+//     .then(txt => {content = txt;})
 
-    await new Promise(resolve => {
-        newHobby = prompt("Add new hobby:");
-        content += (newHobby === "" || newHobby === null) ?  "" : `<div class="col-sm-4">${newHobby}</div>`;
-        resolve();
-    });
+//     await new Promise(resolve => {
+//         newHobby = prompt("Add new hobby:");
+//         content += (newHobby === "" || newHobby === null) ?  "" : `<div class="col-sm-4">${newHobby}</div>`;
+//         resolve();
+//     });
 
-    await fetch('/data/hobbies.txt', {
-        method: 'PUT',
-        body: content
-    });
+//     await fetch('/data/hobbies.txt', {
+//         method: 'PUT',
+//         body: content
+//     });
 
-    await fetch('/data/hobbies.txt')
-    .then(res => res.text())
-    .then(txt => {document.querySelector("#hobby").innerHTML = txt;});
+//     await fetch('/data/hobbies.txt')
+//     .then(res => res.text())
+//     .then(txt => {document.querySelector("#hobby").innerHTML = txt;});
 
-}
+// }
 
 //Task3
 window.onscroll = () =>{
@@ -101,95 +101,95 @@ if(window.matchMedia("(max-width: 500px)").matches){
 }
 
 //window on load
-window.onload = () =>{
+// window.onload = () =>{
 
-    //Hobbies
-    fetch('/data/hobbies.txt')
-    .then(res => res.text())
-    .then(txt => {document.querySelector("#hobby").innerHTML = txt;});
+//     //Hobbies
+//     fetch('/data/hobbies.txt')
+//     .then(res => res.text())
+//     .then(txt => {document.querySelector("#hobby").innerHTML = txt;});
 
-    //Comments
-    fetch('/data/comments.txt')
-    .then(res => res.text())
-    .then(txt => {document.querySelector("#comments").innerHTML = txt;});
+//     //Comments
+//     fetch('/data/comments.txt')
+//     .then(res => res.text())
+//     .then(txt => {document.querySelector("#comments").innerHTML = txt;});
 
-};
+// };
 
 //Comment
-async function processform(){
-    let email =  document.querySelector('#new-email').value;
-    let newComment =  document.querySelector('#new-comment').value;
-    let color = document.querySelectorAll("input[name=new-color]:checked")[0].value; 
-    const now = new Date()
-    let ip, location;
-    fetch('https://extreme-ip-lookup.com/json/')
-    .then( res => res.json())
-    .then(response => {
-        ip = response.query;
-        location = response.country;
-    })
+// async function processform(){
+//     let email =  document.querySelector('#new-email').value;
+//     let newComment =  document.querySelector('#new-comment').value;
+//     let color = document.querySelectorAll("input[name=new-color]:checked")[0].value; 
+//     const now = new Date()
+//     let ip, location;
+//     fetch('https://extreme-ip-lookup.com/json/')
+//     .then( res => res.json())
+//     .then(response => {
+//         ip = response.query;
+//         location = response.country;
+//     })
 
-    let comment = "";
+//     let comment = "";
 
-    await fetch('/data/comments.txt')
-    .then(res => res.text())
-    .then(txt => {comment = txt;})
+//     await fetch('/data/comments.txt')
+//     .then(res => res.text())
+//     .then(txt => {comment = txt;})
 
-    await new Promise(resolve => {
-        let pass = true;
-        if(email === ""){
-            document.querySelector("#emailerror").style.display= "block";
-            pass = false;
-        }else{
-            document.querySelector("#emailerror").style.display= "none";
-            if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-                document.querySelector("#emailerror").style.display= "none";
-            }else{
+//     await new Promise(resolve => {
+//         let pass = true;
+//         if(email === ""){
+//             document.querySelector("#emailerror").style.display= "block";
+//             pass = false;
+//         }else{
+//             document.querySelector("#emailerror").style.display= "none";
+//             if(email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
+//                 document.querySelector("#emailerror").style.display= "none";
+//             }else{
 
-                document.querySelector("#emailerror").style.display= "block";
-                pass = false;
-            }
-        }
+//                 document.querySelector("#emailerror").style.display= "block";
+//                 pass = false;
+//             }
+//         }
 
-        if(newComment === ""){
-            document.querySelector("#commenterror").style.display= "block";
-            pass = false;
-        }else{
-            document.querySelector("#commenterror").style.display= "none";
-        }
+//         if(newComment === ""){
+//             document.querySelector("#commenterror").style.display= "block";
+//             pass = false;
+//         }else{
+//             document.querySelector("#commenterror").style.display= "none";
+//         }
 
 
-        if(pass === true){
-            comment += `<div class="d-flex border-bottom"> 
-                    <div class="flex-shrink">
-                    <svg height="100" width="100">
-                        <circle cx="50" cy="50" r="40" fill="${color}">
-                    </circle></svg>
-                    </div> 
-                    <div class="flex-grow-1">
-                    <h6>${email}</h6>
-                    <p>${newComment}</p>
-                    <blockquote class="blockquote">
-                    <footer class="blockquote-footer">
-                        <div class="d-flex flex-column"><div>Browser information:${navigator.appCodeName}</div><div>Platform: ${navigator.platform}</div><div>Date & Time: ${now}</div><div>IP: ${ip}</div><div>Location: ${location}</div></div>
-                    </footer>     
-                    </blockquote>
-                    </div>
-                </div>`;
+//         if(pass === true){
+//             comment += `<div class="d-flex border-bottom"> 
+//                     <div class="flex-shrink">
+//                     <svg height="100" width="100">
+//                         <circle cx="50" cy="50" r="40" fill="${color}">
+//                     </circle></svg>
+//                     </div> 
+//                     <div class="flex-grow-1">
+//                     <h6>${email}</h6>
+//                     <p>${newComment}</p>
+//                     <blockquote class="blockquote">
+//                     <footer class="blockquote-footer">
+//                         <div class="d-flex flex-column"><div>Browser information:${navigator.appCodeName}</div><div>Platform: ${navigator.platform}</div><div>Date & Time: ${now}</div><div>IP: ${ip}</div><div>Location: ${location}</div></div>
+//                     </footer>     
+//                     </blockquote>
+//                     </div>
+//                 </div>`;
 
-                document.querySelector("#emailerror").style.display= "none";
-                document.querySelector("form").reset();  
-        }
+//                 document.querySelector("#emailerror").style.display= "none";
+//                 document.querySelector("form").reset();  
+//         }
 
-        resolve();
-    });
+//         resolve();
+//     });
 
-    await fetch('/data/comments.txt', {
-        method: 'PUT',
-        body: comment
-    });
+    // await fetch('/data/comments.txt', {
+    //     method: 'PUT',
+    //     body: comment
+    // });
 
-    await fetch('/data/comments.txt')
-    .then(res => res.text())
-    .then(txt => {document.querySelector("#comments").innerHTML = txt;});
+    // await fetch('/data/comments.txt')
+    // .then(res => res.text())
+    // .then(txt => {document.querySelector("#comments").innerHTML = txt;});
 }
