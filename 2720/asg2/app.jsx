@@ -56,6 +56,7 @@ class FileCard extends React.Component {
             this.setState({selected: index});
         else
             this.setState({selected: -1});
+
     }
 
     render() {
