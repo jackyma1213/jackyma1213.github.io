@@ -30,14 +30,17 @@ class App extends React.Component
                 label="Home"
                 />
                 <LongLink to="/images" label="Images" />
-                <LongLink to="/about" label="About" />
+                <LongLink to="/slideshow" label="Slideshow" />
+                
                 </ul>
             <hr/>
 
             <Switch>
                 <Route exact path="/" component={Home} /> 
                 <Route path="/images" component={Images} /> 
-                <Route path="/about" component={About} />   
+                <Route path="/slideshow" component={Slideshow} /> 
+                <Route path="/file/:id" component={File} />  
+                <Route path="*" component={NoMatch} />
             </Switch>
             </div>
             </Router>
@@ -66,59 +69,158 @@ class Home extends React.Component {
 
 class Images extends React.Component {
     render() {
-        return <h2>Images</h2>;
+        return (
+            <>
+            <h2>Images</h2>
+            <Main/>
+            </>
+        );
     }
 }
 
-class About extends React.Component {
+
+
+class Main extends React.Component {
     render() {
-        return <h2>About</h2>;
+        return (
+            <main className="container">
+                <FileCard/>
+            </main>
+        );
+    }
+}
+
+class FileCard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { selected: -1 };
+    }
+
+    handleMouseOver(index, e) {
+        if(this.state.selected != index)
+            this.setState({selected: index});
+        else
+            this.setState({selected: -1});
+
+    }
+
+    render() {
+        return (
+        <Router>
+            {
+            data.map((file, index) =>(
+                <div key={index} onMouseOver={(e) => this.handleMouseOver(index,e)} className="card d-inline-block m-2" style={{width: this.state.selected==index ? 220 : 200}}>
+                    <img src={"images/"+file.filename} alt={file.remarks} className="w-100"/>
+                    <div className="card-body">
+                    <Link to={"/file/"+index}><h6 className="card-title">{file.filename}</h6></Link>
+                        <p className="card-text">Year: {file.year}</p>
+                        { this.state.selected==index &&
+                        <p className="cardtext">{file.remarks}</p> }
+                    </div>
+                </div>
+            ))
+            }
+
+            <Switch>
+            <Route path="/file/:id" component={File} />  
+            </Switch>
+        </Router>
+        );
     }
 }
 
 
-// class Main extends React.Component {
-//     render() {
-//         return (
-//             <main className="container">
-//                 <FileCard/>
-//             </main>
-//         );
-//     }
-// }
+function File() {
+    let { id } = useParams();
+    return (
+        <>
+        <img src={"/images/"+data[id].filename} alt={data[id].remarks} className="w-100"/> 
+        <h6>{data[id].filename}</h6>
+        <p>Year: {data[id].year}</p>
+        <p>{data[id].remarks}</p> 
+        </>
+    );
+}
 
-// class FileCard extends React.Component {
 
-//     constructor(props) {
-//         super(props);
-//         this.state = { selected: -1 };
-//     }
+class Slideshow extends React.Component{
 
-//     handleMouseOver(index, e) {
-//         if(this.state.selected != index)
-//             this.setState({selected: index});
-//         else
-//             this.setState({selected: -1});
+    render(){
+        return (
+            <>
+            <h2>SlideShow</h2>
+            <SlideshowMain/>
+            </>
+        );
+    }
 
-//     }
+}
 
-//     render() {
-//         return (
-            
-//             data.map((file, index) =>(
-//                 <div key={index} onMouseOver={(e) => this.handleMouseOver(index,e)} className="card d-inline-block m-2" style={{width: this.state.selected==index ? 220 : 200}}>
-//                     <img src={"images/"+file.filename} alt="file.remarks" className="w-100"/>
-//                     <div className="card-body">
-//                         <h6 className="card-title">{file.filename}</h6>
-//                         <p className="card-text">Year: {file.year}</p>
-//                         { this.state.selected==index &&
-//                         <p className="cardtext">{file.remarks}</p> }
-//                     </div>
-//                 </div>
-//             ))
-//         );
-//     }
-// }
+class SlideshowMain extends React.Component{
+
+
+    constructor(props) {
+        super(props);
+        this.state = { currentImageID: 0, currentInterval: 1000, interval: null };
+    }
+
+    
+
+    handleClick(action, e){
+        switch(action){
+            case 1:
+                clearInterval(this.state.interval);
+                this.state.interval = setInterval(()=>{
+                    if(this.state.currentImageID != 4)
+                        this.setState({currentImageID: this.state.currentImageID+1 });
+                    else
+                        this.setState({currentImageID: 0});
+                }, this.state.currentInterval);
+                break;
+            case 2:
+                clearInterval(this.state.interval);
+                break;
+            case 3:
+                this.setState({currentInterval: this.state.currentInterval*2 });
+                clearInterval(this.state.interval);
+                this.state.interval = setInterval(()=>{
+                    if(this.state.currentImageID != 4)
+                        this.setState({currentImageID: this.state.currentImageID+1 });
+                    else
+                        this.setState({currentImageID: 0});
+                }, this.state.currentInterval);
+                break;
+            case 4:
+                this.setState({currentInterval: this.state.currentInterval/2 });
+                clearInterval(this.state.interval);
+                this.state.interval = setInterval(()=>{
+                    if(this.state.currentImageID != 4)
+                        this.setState({currentImageID: this.state.currentImageID+1 });
+                    else
+                        this.setState({currentImageID: 0});
+                }, this.state.currentInterval);
+                break;
+        }
+    }
+
+
+    render(){
+        return(
+            <main className="container">
+            <button onClick={(e)=> this.handleClick(1, e)}>Start</button>
+            <button onClick={(e)=> this.handleClick(2, e)}>Stop</button>
+            <button onClick={(e)=> this.handleClick(3, e)}>Slower</button>
+            <button onClick={(e)=> this.handleClick(4, e)}>Faster</button>
+                
+            <div className="carousel slide">
+                <img src={"images/"+data[this.state.currentImageID].filename} className="w-100"/>
+            </div>
+            </main>
+
+        );
+    }
+}
 
 
 function LongLink({label, to, activeOnlyWhenExact}) {
@@ -131,6 +233,18 @@ function LongLink({label, to, activeOnlyWhenExact}) {
     {match && "> "}
     <Link to={to}>{label}</Link>
     </li>
+    );
+}
+
+
+function NoMatch() {
+    let location = useLocation();
+    return (
+    <div>
+    <h3>
+    No match for <code>{location.pathname}</code>
+    </h3>
+    </div>
     );
 }
 
