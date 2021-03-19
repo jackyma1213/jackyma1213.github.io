@@ -29,7 +29,7 @@ class App extends React.Component
                 to="/"
                 label="Home"
                 />
-                <LongLink to="/images" label="Images" />
+                <LongLink to="/file" label="Images" />
                 <LongLink to="/slideshow" label="Slideshow" />
                 
                 </ul>
@@ -37,7 +37,7 @@ class App extends React.Component
 
             <Switch>
                 <Route exact path="/" component={Home} /> 
-                <Route path="/images" component={Images} /> 
+                <Route path="/file" component={Images} /> 
                 <Route path="/slideshow" component={Slideshow} /> 
                 <Route path="/file/:id" component={File} />  
                 <Route path="*" component={NoMatch} />
@@ -111,7 +111,7 @@ class FileCard extends React.Component {
             {
             data.map((file, index) =>(
                 <div key={index} onMouseOver={(e) => this.handleMouseOver(index,e)} className="card d-inline-block m-2" style={{width: this.state.selected==index ? 220 : 200}}>
-                    <img src={"images/"+file.filename} alt={file.remarks} className="w-100"/>
+                    <img src={"/images/"+file.filename} alt={file.remarks} className="w-100"/>
                     <div className="card-body">
                     <Link to={"/file/"+index}><h6 className="card-title">{file.filename}</h6></Link>
                         <p className="card-text">Year: {file.year}</p>
@@ -122,7 +122,7 @@ class FileCard extends React.Component {
             ))
             }
 
-            <Switch>
+            <Switch> 
             <Route path="/file/:id" component={File} />  
             </Switch>
         </Router>
