@@ -26,11 +26,11 @@ class App extends React.Component
             <ul>
                 <LongLink
                 activeOnlyWhenExact={true}
-                to="/"
+                to="./"
                 label="Home"
                 />
-                <LongLink to="/file" label="Images" />
-                <LongLink to="/slideshow" label="Slideshow" />
+                <LongLink to="./file" label="Images" />
+                <LongLink to="./slideshow" label="Slideshow" />
                 
                 </ul>
             <hr/>
