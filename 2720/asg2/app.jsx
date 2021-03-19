@@ -36,7 +36,7 @@ class App extends React.Component
             <hr/>
 
             <Switch>
-                <Route exact path={this.props.location.pathname +"/"} component={Home} /> 
+                <Route exact path="./" component={Home} /> 
                 <Route path="/file" component={Images} /> 
                 <Route path="/slideshow" component={Slideshow} /> 
                 <Route path="/file/:id" component={File} />  
