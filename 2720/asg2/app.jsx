@@ -37,9 +37,9 @@ class App extends React.Component
 
             <Switch>
                 <Route exact path="./" component={Home} /> 
-                <Route path="/file" component={Images} /> 
-                <Route path="/slideshow" component={Slideshow} /> 
-                <Route path="/file/:id" component={File} />  
+                <Route path="./file" component={Images} /> 
+                <Route path="./slideshow" component={Slideshow} /> 
+                <Route path="./file/:id" component={File} />  
                 <Route path="*" component={NoMatch} />
             </Switch>
             </div>
