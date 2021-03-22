@@ -63,7 +63,14 @@ class Header extends React.Component {
 
 class Home extends React.Component {
     render() {
-        return <h2>Home</h2>;
+        return (
+        <>
+            <h2>Home</h2>
+            <main className="container">
+                <img src="/diagram.png" />
+            </main>
+        </>
+        );
     }
 }
 
