@@ -26,20 +26,20 @@ class App extends React.Component
             <ul>
                 <LongLink
                 activeOnlyWhenExact={true}
-                to="./"
+                to="/"
                 label="Home"
                 />
-                <LongLink to="./file" label="Images" />
-                <LongLink to="./slideshow" label="Slideshow" />
+                <LongLink to="/file" label="Images" />
+                <LongLink to="/slideshow" label="Slideshow" />
                 
                 </ul>
             <hr/>
 
             <Switch>
-                <Route exact path="./" component={Home} /> 
-                <Route path="./file" component={Images} /> 
-                <Route path="./slideshow" component={Slideshow} /> 
-                <Route path="./file/:id" component={File} />  
+                <Route exact path="/" component={Home} /> 
+                <Route path="/file" component={Images} /> 
+                <Route path="/slideshow" component={Slideshow} /> 
+                <Route path="/file/:id" component={File} />  
                 <Route path="*" component={NoMatch} />
             </Switch>
             </div>
@@ -97,12 +97,13 @@ class FileCard extends React.Component {
         this.state = { selected: -1 };
     }
 
-    handleMouseOver(index, e) {
+    handleMouseOver(index) {
         if(this.state.selected != index)
             this.setState({selected: index});
-        else
-            this.setState({selected: -1});
+    }
 
+    handleMouseOut() {
+        this.setState({selected: -1});
     }
 
     render() {
@@ -110,13 +111,15 @@ class FileCard extends React.Component {
         <Router>
             {
             data.map((file, index) =>(
-                <div key={index} onMouseOver={(e) => this.handleMouseOver(index,e)} className="card d-inline-block m-2" style={{width: this.state.selected==index ? 220 : 200}}>
+                
+                <div key={index} onMouseOver={() => this.handleMouseOver(index)}  onMouseOut={() => this.handleMouseOut()} className="card d-inline-block m-2" style={{width: this.state.selected==index ? 220 : 200}}>
                     <img src={"/images/"+file.filename} alt={file.remarks} className="w-100"/>
                     <div className="card-body">
                     <Link to={"/file/"+index}><h6 className="card-title">{file.filename}</h6></Link>
                         <p className="card-text">Year: {file.year}</p>
                         { this.state.selected==index &&
-                        <p className="cardtext">{file.remarks}</p> }
+                        <p className="card-text">{file.remarks}</p> }
+                        
                     </div>
                 </div>
             ))
@@ -145,20 +148,6 @@ function File() {
 
 
 class Slideshow extends React.Component{
-
-    render(){
-        return (
-            <>
-            <h2>SlideShow</h2>
-            <SlideshowMain/>
-            </>
-        );
-    }
-
-}
-
-class SlideshowMain extends React.Component{
-
 
     constructor(props) {
         super(props);
@@ -205,8 +194,11 @@ class SlideshowMain extends React.Component{
     }
 
 
+
     render(){
-        return(
+        return (
+            <>
+            <h2>SlideShow</h2>
             <main className="container">
             <button onClick={(e)=> this.handleClick(1, e)}>Start</button>
             <button onClick={(e)=> this.handleClick(2, e)}>Stop</button>
@@ -217,10 +209,12 @@ class SlideshowMain extends React.Component{
                 <img src={"images/"+data[this.state.currentImageID].filename} className="w-100"/>
             </div>
             </main>
-
+            </>
         );
     }
+
 }
+
 
 
 function LongLink({label, to, activeOnlyWhenExact}) {
