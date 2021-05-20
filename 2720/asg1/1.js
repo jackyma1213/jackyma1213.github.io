@@ -34,30 +34,30 @@ function task1(){
 }
 
 //Task2
-// async function task2(){
+async function task2(){
     
-//     let content = "";
+    let content = "";
 
-//     await fetch('/data/hobbies.txt')
-//     .then(res => res.text())
-//     .then(txt => {content = txt;})
+    await fetch('/data/hobbies.txt')
+    .then(res => res.text())
+    .then(txt => {
+        content = txt;
+        newHobby = prompt("Add new hobby:");
+        content += (newHobby === "" || newHobby === null) ?  "" : `<div class="col-sm-4">${newHobby}</div>`;
+    })
 
-//     await new Promise(resolve => {
-//         newHobby = prompt("Add new hobby:");
-//         content += (newHobby === "" || newHobby === null) ?  "" : `<div class="col-sm-4">${newHobby}</div>`;
-//         resolve();
-//     });
 
-//     await fetch('/data/hobbies.txt', {
-//         method: 'PUT',
-//         body: content
-//     });
 
-//     await fetch('/data/hobbies.txt')
-//     .then(res => res.text())
-//     .then(txt => {document.querySelector("#hobby").innerHTML = txt;});
+    await fetch('/data/hobbies.txt', {
+        method: 'PUT',
+        body: content
+    });
 
-// }
+    await fetch('/data/hobbies.txt')
+    .then(res => res.text())
+    .then(txt => {document.querySelector("#hobby").innerHTML = txt;});
+
+}
 
 //Task3
 window.onscroll = () =>{
