@@ -299,20 +299,20 @@ class Header extends React.Component {
                             
                             
                             <div className="form-field">
-                                <label className="form-label" for="login_email">
+                                <label className="form-label" htmlFor="login_email">
                                     電郵地址
                                     <small><sup>必須填寫</sup></small>
                                 </label>
                                 <input className="form-input" name="login_email" id="navPages_login_email" type="email" />
                             </div>
                             <div className="form-field">
-                                <label className="form-label" for="navPages_navPages_login_pass">
+                                <label className="form-label" htmlFor="navPages_navPages_login_pass">
                                     密碼
                                     <small><sup>必須填寫</sup></small>
                                 </label>
-                                <input className="form-input" id="navPages_login_pass" type="password" name="login_pass" autocomplete="off" />
+                                <input className="form-input" id="navPages_login_pass" type="password" name="login_pass" autoComplete="off" />
                             </div>
-                            <div className="g-recaptcha" data-sitekey="6LccmasUAAAAAIRhScC9asOrH_rQblw06weNOzDI"><div style={{width: 304, height: 78}}><div><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LccmasUAAAAAIRhScC9asOrH_rQblw06weNOzDI&amp;co=aHR0cHM6Ly9vbGF5LmNvbS5oazo0NDM.&amp;hl=zh-TW&amp;v=FDTCuNjXhn1sV0lk31aK53uB&amp;size=normal&amp;cb=58srfx34qv71" width="304" height="78" role="presentation" name="a-f5ffpzz9lkmq" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" className="g-recaptcha-response" style={{width: 250, height: 40, border: '1px solid rgb(193, 193, 193)', margin: '10px 25px', padding: 0, resize: 'none', display: 'none'}}></textarea></div></div>    <div className="form-actions">
+                            <div className="g-recaptcha" data-sitekey="6LccmasUAAAAAIRhScC9asOrH_rQblw06weNOzDI"><div style={{width: 304, height: 78}}><div><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LccmasUAAAAAIRhScC9asOrH_rQblw06weNOzDI&amp;co=aHR0cHM6Ly9vbGF5LmNvbS5oazo0NDM.&amp;hl=zh-TW&amp;v=FDTCuNjXhn1sV0lk31aK53uB&amp;size=normal&amp;cb=58srfx34qv71" width="304" height="78" role="presentation" name="a-f5ffpzz9lkmq" frameBorder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" className="g-recaptcha-response" style={{width: 250, height: 40, border: '1px solid rgb(193, 193, 193)', margin: '10px 25px', padding: 0, resize: 'none', display: 'none'}}></textarea></div></div>    <div className="form-actions">
                                 <input type="submit" className="button button--primary custom-login-submit event_profile_login" data-action-detail="Log_In" value="登入" />
                                 <a className="forgot-password" href="/login.php?action=reset_password">忘記密碼?</a>
                             </div>
@@ -332,7 +332,7 @@ class Header extends React.Component {
                                                 <svg><use xlinkHref="#icon-chevron-down"></use></svg>
                                             </span>
                                         </a>
-                                        <div className={this.state.isShown ? "navPage-subMenu is-open" : "navPage-subMenu" }id="navPages-categories" aria-hidden="true" tabindex="-1" data-toggle-menu="">
+                                        <div className={this.state.isShown ? "navPage-subMenu is-open" : "navPage-subMenu" }id="navPages-categories" aria-hidden="true" tabIndex="-1" data-toggle-menu="">
                                             <div className="container">
                                                 <ul className="navPage-subMenu-list categories-list-first">
                                                         <li className="navPage-subMenu-item">
@@ -490,15 +490,15 @@ class Header extends React.Component {
                                     <span className="countPill cart-quantity">0</span>
                                 </a>
 
-                                <div className={this.state.cartIsExpand ? "dropdown-menu is-open f-open-dropdown" : "dropdown-menu"} id="cart-preview-dropdown" data-dropdown-content="" aria-hidden="true" aria-autoclose="false"
+                                <div className={this.state.cartIsExpand ? "dropdown-menu is-open f-open-dropdown" : "dropdown-menu"} id="cart-preview-dropdown" data-dropdown-content="" aria-hidden="true" 
                                 style={this.state.cartIsExpand ? {position: "absolute", left: "-154.156px", top: "46.9844px"} : {position: "absolute", left: "-99999px", top: "46.9844px"}}
                                 >
-                                    <div class="previewCart">
-                                        <div class="previewCart-quantity">
-                                            <span class="label">產品數量</span>
-                                            <span class="quantity">0</span>
+                                    <div className="previewCart">
+                                        <div className="previewCart-quantity">
+                                            <span className="label">產品數量</span>
+                                            <span className="quantity">0</span>
                                         </div>
-                                            <div class="previewCart-emptyBody">
+                                            <div className="previewCart-emptyBody">
                                                 您的購物車為空
                                             </div>
                                     </div>
@@ -512,7 +512,7 @@ class Header extends React.Component {
                                         登入
                                     </a>
 
-                                <div className={this.state.loginIsExpand ? "dropdown-menu dropdown-menu--login is-open f-open-dropdown" : "dropdown-menu dropdown-menu--login"} id="account-dropdown" data-dropdown-content="" aria-hidden="true" aria-autoclose="false" style={this.state.loginIsExpand ? {position:"absolute", left: "-169.203px",top:"46.9844px"} : {position: "absolute",left:"-99999px", top: "46.9844px"}} >
+                                <div className={this.state.loginIsExpand ? "dropdown-menu dropdown-menu--login is-open f-open-dropdown" : "dropdown-menu dropdown-menu--login"} id="account-dropdown" data-dropdown-content="" aria-hidden="true" style={this.state.loginIsExpand ? {position:"absolute", left: "-169.203px",top:"46.9844px"} : {position: "absolute",left:"-99999px", top: "46.9844px"}} >
                                         <form className="form custom-login-form" action="/login.php?action=check_login" method="post">
                                             <legend className="form-label">登入您的OLAY帳戶<a href="/login.php?action=create_account" className="registration-link" data-action-detail="23989KDKHWE">註冊</a></legend>
                                             
@@ -889,7 +889,7 @@ class ItemList extends React.Component {
                 {
                     data.map((item, index) =>(
 
-                        <li className="product">
+                        <li className="product" id={index}>
                                 <article className="card">
                                     <figure className="card-figure">
                                         <a href="#">
@@ -1232,7 +1232,7 @@ class Footer extends React.Component {
 //     return (
 //     <div>
 //     <h3>
-//     No match for <code>{location.pathname}</code>
+//     No match htmlFor <code>{location.pathname}</code>
 //     </h3>
 //     </div>
 //     );
