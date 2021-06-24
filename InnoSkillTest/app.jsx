@@ -1,3 +1,4 @@
+
 const {useRouteMatch, useParams, useLocation} = ReactRouterDOM;
 const {BrowserRouter, Link, Route, Switch} = ReactRouterDOM;
 const Router = BrowserRouter;
@@ -132,13 +133,60 @@ const data = [
 
 class App extends React.Component
 {
+    constructor(props){
+        super(props);
+    }
+
     componentDidMount () {
         document.title = '皇牌產品系列｜OLAY香港';
+
+        window.onscroll = (e) => {
+            if(window.innerWidth < 992)
+            {
+                if(window.scrollY > 1)
+                {
+                    this.setState({isScroll : true});
+                    this.scrollHandler();
+                } 
+                else 
+                {
+                    this.setState({isScroll : false});
+                    this.scrollHandler();
+                } 
+            }
+            else
+            {
+                if(window.scrollY > 140)
+                {
+                    this.setState({isScroll : true});
+                    this.scrollHandler();
+                } 
+                else 
+                {
+                    this.setState({isScroll : false});
+                    this.scrollHandler();
+                } 
+            }
+  
+        };
+    }
+
+
+
+    scrollHandler(){
+        if(this.state.isScroll)
+            document.getElementById("app").classList.add("is-fixed--header");
+        else
+        document.getElementById("app").classList.remove("is-fixed--header");
+
     }
 
     render() {
         return (
-            <>
+            <div 
+            ref={this.myRef}
+            onScroll={this.onScroll}
+            >
             <svg xmlns="http://www.w3.org/2000/svg" className="injected-svg icons-svg-sprite" data-src="https://cdn11.bigcommerce.com/s-f8et57gva1/stencil/1a81d1d0-b00e-0139-b736-1a0fc5a766bd/e/6d19d740-3078-0139-7b17-0242ac110007/img/icon-sprite.svg">
                 <symbol id="icon-heart" viewBox="0 0 1024 1024"><path d="M489.993 887.107L177.906 586.021C173.904 582.52 63.873 481.99 63.873 361.958c0-146.54 89.526-234.065 239.069-234.065 87.523 0 169.546 69.019 209.058 108.03 39.512-39.011 121.535-108.03 209.059-108.03 149.542 0 239.068 87.525 239.068 234.065 0 120.033-110.031 220.563-114.533 225.065L534.007 887.107c-6 6-14.003 9-22.007 9-8.003 0-16.007-3-22.007-9z"></path></symbol>
                 <symbol id="icon-cart" viewBox="0 0 492.61 512"><defs><clipPath id="a-0"><path fill="none" d="M0 0h492.61v512H0z"></path></clipPath></defs><path d="M184.89 512a64.65 64.65 0 1 1 64.65-64.65A64.72 64.72 0 0 1 184.89 512m0-90.5a25.86 25.86 0 1 0 25.86 25.86 25.88 25.88 0 0 0-25.86-25.86M376.24 512a64.65 64.65 0 1 1 64.65-64.65A64.72 64.72 0 0 1 376.24 512m0-90.5a25.86 25.86 0 1 0 25.86 25.86 25.88 25.88 0 0 0-25.86-25.86M428 353.62H156.45a19.4 19.4 0 0 1-19-15.63L80.51 50.32 15.9 38.48a19.39 19.39 0 1 1 7-38.15l77.57 14.22A19.39 19.39 0 0 1 116 29.86L133.63 119h339.58a19.4 19.4 0 0 1 18.9 23.76l-45.25 195.82a19.39 19.39 0 0 1-18.9 15m-255.58-38.75h240.16l36.29-157.09H141.3z"></path></symbol>
@@ -146,11 +194,15 @@ class App extends React.Component
                 <symbol id="icon-user" viewBox="0 0 433.23 512"><path d="M293.8 237.41a131.18 131.18 0 0 0 54.1-106.12C347.9 58.89 289 0 216.62 0S85.33 58.89 85.33 131.28a131.18 131.18 0 0 0 54.09 106.12C58 268.57 0 347.53 0 439.8A72.29 72.29 0 0 0 72.21 512H361a72.29 72.29 0 0 0 72.2-72.2c0-92.26-58-171.22-139.43-202.39M124.72 131.28a91.9 91.9 0 1 1 91.9 91.9 92 92 0 0 1-91.9-91.9M361 472.62H72.21a32.86 32.86 0 0 1-32.83-32.82c0-97.73 79.5-177.23 177.23-177.23s177.23 79.5 177.23 177.23A32.86 32.86 0 0 1 361 472.62"></path></symbol>
                 <symbol viewBox="0 0 24 24" id="icon-add"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></symbol>
                 <symbol viewBox="0 0 26 28" id="icon-star"> <path d="M0 10.109q0-0.578 0.875-0.719l7.844-1.141 3.516-7.109q0.297-0.641 0.766-0.641t0.766 0.641l3.516 7.109 7.844 1.141q0.875 0.141 0.875 0.719 0 0.344-0.406 0.75l-5.672 5.531 1.344 7.812q0.016 0.109 0.016 0.313 0 0.328-0.164 0.555t-0.477 0.227q-0.297 0-0.625-0.187l-7.016-3.687-7.016 3.687q-0.344 0.187-0.625 0.187-0.328 0-0.492-0.227t-0.164-0.555q0-0.094 0.031-0.313l1.344-7.812-5.688-5.531q-0.391-0.422-0.391-0.75z"></path> </symbol>
+                <symbol viewBox="0 0 32 32" id="icon-youtube"> <path d="M31.6634051,8.8527593 C31.6634051,8.8527593 31.3509198,6.64879843 30.3919217,5.67824658 C29.1757339,4.40441487 27.8125088,4.39809002 27.1873503,4.32353816 C22.7118278,4 15.9983092,4 15.9983092,4 L15.984407,4 C15.984407,4 9.27104501,4 4.79536595,4.32353816 C4.17017613,4.39809002 2.80745205,4.40441487 1.59082583,5.67824658 C0.631890411,6.64879843 0.319843444,8.8527593 0.319843444,8.8527593 C0.319843444,8.8527593 0,11.4409393 0,14.0290881 L0,16.4554834 C0,19.0436008 0.319843444,21.6317495 0.319843444,21.6317495 C0.319843444,21.6317495 0.631890411,23.8357417 1.59082583,24.8062935 C2.80745205,26.0801566 4.40557339,26.0398591 5.11736986,26.1733699 C7.67602348,26.4187241 15.9913894,26.4946536 15.9913894,26.4946536 C15.9913894,26.4946536 22.7118278,26.4845401 27.1873503,26.1610333 C27.8125088,26.0864501 29.1757339,26.0801566 30.3919217,24.8062935 C31.3509198,23.8357417 31.6634051,21.6317495 31.6634051,21.6317495 C31.6634051,21.6317495 31.9827789,19.0436008 31.9827789,16.4554834 L31.9827789,14.0290881 C31.9827789,11.4409393 31.6634051,8.8527593 31.6634051,8.8527593 Z M12.6895342,19.39582 L12.6880626,10.4095186 L21.3299413,14.9183249 L12.6895342,19.39582 Z" id="youtube-Imported-Layers"></path> </symbol>
+                <symbol id="icon-facebook" viewBox="0 0 1024 1024"><path d="M767.414857 6.875429l0 150.820571-89.746286 0q-49.152 0-66.267429 20.553143t-17.115429 61.732571l0 108.032 167.424 0-22.308571 169.179429-145.115429 0 0 433.737143-174.884571 0 0-433.737143-145.700571 0 0-169.179429 145.700571 0 0-124.562286q0-106.276571 59.465143-164.864t158.281143-58.587429q83.968 0 130.267429 6.875429z"></path></symbol>
+                <symbol viewBox="0 0 24 24" id="icon-remove"><path d="M19 13H5v-2h14v2z"></path></symbol>
             </svg>
             <Promotion/>
             <Header/>
             <Main />
-            </> 
+            <Footer />
+            </div> 
         );
     }
 }
@@ -168,15 +220,73 @@ class Promotion extends React.Component {
 }
 
 class Header extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isShown: false,
+            isSearch: false,
+            burgerIsExpand: false,
+            loginIsExpand: false,
+            cartIsExpand: false
+        };
+        this.searchHandler = this.searchHandler.bind(this);
+        this.burgerMenuHandler = this.burgerMenuHandler.bind(this);
+        this.loginOnClickHandler = this.loginOnClickHandler.bind(this);
+        this.cartOnClickHandler = this.cartOnClickHandler.bind(this);
+    }
+
+    searchHandler(){
+        
+        this.setState(
+            {
+                isSearch: true
+            });
+            setTimeout(()=>{document.getElementById("nav-quick-search").focus()} , 0);
+        
+
+    }
+
+    burgerMenuHandler(){
+        if(this.state.burgerIsExpand)
+            this.setState(
+            {
+                burgerIsExpand: false
+            });
+        else
+        this.setState(
+            {
+                burgerIsExpand: true
+            });
+    }
+
+    loginOnClickHandler(){
+        if(this.state.loginIsExpand)
+            this.setState({
+                loginIsExpand: false
+            })
+        else
+            this.setState({
+                loginIsExpand: true
+            })
+
+    }
+
+    cartOnClickHandler(){
+        if(this.state.cartIsExpand)
+            this.setState({cartIsExpand: false})
+        else
+            this.setState({cartIsExpand: true})
+    }
+
     render() {
         return (
-            <header className="header" >
+            <header className={this.state.burgerIsExpand ? "header is-open" : "header"} >
                 <div className="container flex-header">
-                    <a href="#" className="mobileMenu-toggle" data-mobile-menu-toggle="menu" aria-controls="menu" aria-expanded="false">
+                    <a href="#" className={this.state.burgerIsExpand ? "mobileMenu-toggle is-open" : "mobileMenu-toggle"} data-mobile-menu-toggle="menu" aria-controls="menu" onClick={this.burgerMenuHandler}>
                         <span className="mobileMenu-toggleIcon">Toggle menu</span>
                     </a>
 
-                    <div className="navPages-container" id="menu" data-menu="">
+                    <div className={this.state.burgerIsExpand ? "navPages-container is-open" : "navPages-container"} id="menu" data-menu="">
                     <nav className="navPages">
                             <ul className="navPages-list navPages-list--user">
                                     <li className="navPages-item navPages-item--login">
@@ -215,13 +325,87 @@ class Header extends React.Component {
                                             <span className="navPages-label">網店獨家</span>
                                         </a>
                                 </li>
-                                <li className="navPages-item navPages-item-categories" data-toggle-item="">
-                                        <a className="navPages-action has-subMenu" href="https://olay.com.hk/productmenu" data-collapsible="navPages-categories" aria-label="產品系列" aria-controls="navPages-categories" aria-expanded="false">
+                                <li className="navPages-item navPages-item-categories" data-toggle-item="" onMouseEnter={() => this.setState({isShown: true})} onMouseLeave={() => this.setState({isShown: false})}>
+                                        <a className={this.state.isShown ? "navPages-action has-subMenu is-open" : "navPages-action has-subMenu"} href="https://olay.com.hk/productmenu" data-collapsible="navPages-categories" aria-label="產品系列" aria-controls="navPages-categories">
                                             <span className="navPages-label">產品系列</span>
                                             <span className="icon navPages-action-moreIcon" aria-hidden="true">
                                                 <svg><use xlinkHref="#icon-chevron-down"></use></svg>
                                             </span>
                                         </a>
+                                        <div className={this.state.isShown ? "navPage-subMenu is-open" : "navPage-subMenu" }id="navPages-categories" aria-hidden="true" tabindex="-1" data-toggle-menu="">
+                                            <div className="container">
+                                                <ul className="navPage-subMenu-list categories-list-first">
+                                                        <li className="navPage-subMenu-item">
+                                                                <a className="navPage-subMenu-action navPages-action has-subMenu activePage" href="https://olay.com.hk/productline" aria-label="產品系列">
+                                                                    產品系列
+                                                                    <span className="collapsible-icon-wrapper" data-collapsible="navPages-23" data-collapsible-disabled-breakpoint="medium" data-collapsible-disabled-state="open" data-collapsible-enabled-state="closed" aria-expanded="false" aria-label="" aria-controls="navPages-23">
+                                                                        <span className="icon navPages-action-moreIcon" aria-hidden="true">
+                                                                            <svg><use xlinkHref="#icon-chevron-down"></use></svg>
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                                <ul className="navPage-childList categories-list-second" id="navPages-23" aria-hidden="true">
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/productline/goldenaura" aria-label="GOLDEN AURA抗氧酵母青春系列">
+                                                                                GOLDEN AURA抗氧酵母青春系列
+                                                                            </a>
+                                                                    </li>
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/productline/regenerist" aria-label="REGENERIST新生高效系列">
+                                                                                REGENERIST新生高效系列
+                                                                            </a>
+                                                                    </li>
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/productline/whiteradiance" aria-label="WHITE RADIANCE高效透白光塑系列">
+                                                                                WHITE RADIANCE高效透白光塑系列
+                                                                            </a>
+                                                                    </li>
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/productline/proxbyolay" aria-label="PROX BY OLAY科研級精華系列">
+                                                                                PROX BY OLAY科研級精華系列
+                                                                            </a>
+                                                                    </li>
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/productline/keithharingcrossover" aria-label="OLAY X KEITH HARING聯乘系列">
+                                                                                OLAY X KEITH HARING聯乘系列
+                                                                            </a>
+                                                                    </li>
+                                                                </ul>
+                                                        </li>
+                                                        <li className="navPage-subMenu-item">
+                                                                <a className="navPage-subMenu-action navPages-action has-subMenu" href="https://olay.com.hk/skincare" aria-label="肌膚護理">
+                                                                    肌膚護理
+                                                                    <span className="collapsible-icon-wrapper" data-collapsible="navPages-33" data-collapsible-disabled-breakpoint="medium" data-collapsible-disabled-state="open" data-collapsible-enabled-state="closed" aria-expanded="false" aria-label="" aria-controls="navPages-33">
+                                                                        <span className="icon navPages-action-moreIcon" aria-hidden="true">
+                                                                            <svg><use xlinkHref="#icon-chevron-down"></use></svg>
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                                <ul className="navPage-childList categories-list-second" id="navPages-33" aria-hidden="true">
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/skincare/toner" aria-label="爽膚">
+                                                                                爽膚
+                                                                            </a>
+                                                                    </li>
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/skincare/essence" aria-label="精華">
+                                                                                精華
+                                                                            </a>
+                                                                    </li>
+                                                                    <li className="navPage-childList-item">
+                                                                            <a className="navPage-childList-action navPages-action" href="https://olay.com.hk/skincare/cream" aria-label="面霜">
+                                                                                面霜
+                                                                            </a>
+                                                                    </li>
+                                                                </ul>
+                                                        </li>
+                                                    <li className="navPage-subMenu-item navPage-subMenu-recommend-products">
+                                                        <a className="navPage-subMenu-action navPages-action menu-recommend-product-label">推介產品</a>
+                                                        <div id="menu-recommend-products"></div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                 </li>
                                 <li className="navPages-item navPages-item-categories" data-toggle-item="">
                                         <a className="navPages-action" href="https://olay.com.hk/bestseller" aria-label="暢銷產品">
@@ -281,7 +465,7 @@ class Header extends React.Component {
                             </li>
 
                             <li className="navUser-item navUser-item--quickSearch">
-                                <button className="navUser-action navUser-action--quickSearch" type="button" id="quick-search-expand" data-search="quickSearch" aria-controls="quickSearch" aria-label="搜索" aria-expanded="false">
+                                <button className="navUser-action navUser-action--quickSearch" type="button" id="quick-search-expand" data-search="quickSearch" aria-controls="quickSearch" aria-label="搜索" onClick={this.searchHandler}>
                                     <span className="icon" aria-hidden="true" >
                                         <svg><use xlinkHref="#icon-search"></use></svg>
                                     </span>
@@ -297,8 +481,8 @@ class Header extends React.Component {
                                         收藏夾
                                     </a>
                                 </li>
-                            <li className="navUser-item navUser-item--cart">
-                                <a className="navUser-action event_preview_cart navUser-item--cart__hidden-s" data-cart-preview="" data-dropdown="cart-preview-dropdown" data-options="align:right" href="/cart.php" aria-label="購物車沒有貨品" aria-expanded="false">
+                            <li className="navUser-item navUser-item--cart" tabIndex="0" onClick={this.cartOnClickHandler} onBlur={() => this.setState({cartIsExpand: false})}>
+                                <a className={this.state.cartIsExpand ? "navUser-action event_preview_cart navUser-item--cart__hidden-s is-open" : "navUser-action event_preview_cart navUser-item--cart__hidden-s"} data-cart-preview="" data-dropdown="cart-preview-dropdown" data-options="align:right" aria-label="購物車沒有貨品" aria-expanded="false">
                                     <span className="icon" aria-hidden="true">
                                         <svg><use xlinkHref="#icon-cart"></use></svg>
                                     </span>
@@ -306,17 +490,29 @@ class Header extends React.Component {
                                     <span className="countPill cart-quantity">0</span>
                                 </a>
 
-                                <div className="dropdown-menu" id="cart-preview-dropdown" data-dropdown-content="" aria-hidden="true" aria-autoclose="false"></div>
+                                <div className={this.state.cartIsExpand ? "dropdown-menu is-open f-open-dropdown" : "dropdown-menu"} id="cart-preview-dropdown" data-dropdown-content="" aria-hidden="true" aria-autoclose="false"
+                                style={this.state.cartIsExpand ? {position: "absolute", left: "-154.156px", top: "46.9844px"} : {position: "absolute", left: "-99999px", top: "46.9844px"}}
+                                >
+                                    <div class="previewCart">
+                                        <div class="previewCart-quantity">
+                                            <span class="label">產品數量</span>
+                                            <span class="quantity">0</span>
+                                        </div>
+                                            <div class="previewCart-emptyBody">
+                                                您的購物車為空
+                                            </div>
+                                    </div>
+                                </div>
                             </li>
-                            <li className="navUser-item navUser-item--account">
-                                    <a className="navUser-action" data-dropdown="account-dropdown" data-options="align:right" href="/login.php" aria-label="購物車沒有貨品" aria-expanded="false">
+                            <li className="navUser-item navUser-item--account"  tabIndex="0" onClick={this.loginOnClickHandler} onBlur={()=>this.setState({loginIsExpand: false})}>
+                                    <a className={this.state.loginIsExpand ? "navUser-action is-open" : "navUser-action"} data-dropdown="account-dropdown" data-options="align:right"  aria-label="購物車沒有貨品"   >
                                         <span className="icon" aria-hidden="true">
                                             <svg><use xlinkHref="#icon-user"></use></svg>
                                         </span>
                                         登入
                                     </a>
 
-                                <div className="dropdown-menu dropdown-menu--login" id="account-dropdown" data-dropdown-content="" aria-hidden="true" aria-autoclose="false">
+                                <div className={this.state.loginIsExpand ? "dropdown-menu dropdown-menu--login is-open f-open-dropdown" : "dropdown-menu dropdown-menu--login"} id="account-dropdown" data-dropdown-content="" aria-hidden="true" aria-autoclose="false" style={this.state.loginIsExpand ? {position:"absolute", left: "-169.203px",top:"46.9844px"} : {position: "absolute",left:"-99999px", top: "46.9844px"}} >
                                         <form className="form custom-login-form" action="/login.php?action=check_login" method="post">
                                             <legend className="form-label">登入您的OLAY帳戶<a href="/login.php?action=create_account" className="registration-link" data-action-detail="23989KDKHWE">註冊</a></legend>
                                             
@@ -344,10 +540,10 @@ class Header extends React.Component {
                                 </div>
                             </li>
                         </ul>
-                        <div className="dropdown dropdown--quickSearch" id="quickSearch" aria-hidden="true" tabIndex="-1" data-prevent-quick-search-close="">
+                        <div className={ this.state.isSearch ? "dropdown dropdown--quickSearch is-open f-open-dropdown" : "dropdown dropdown--quickSearch"} id="quickSearch" tabIndex="-1" data-prevent-quick-search-close="" >
                             <div className="container">
                                 <div className="form-wrapper">
-                                    <form className="form">
+                                    <form className="form" onBlur={()=>this.setState({isSearch: false})}>
                                         <fieldset className="form-fieldset">
                                             <div className="form-field">
                                                 <label className="is-srOnly" htmlFor="nav-quick-search">搜索</label>
@@ -425,13 +621,73 @@ class Content extends React.Component {
 }
 
 class Sidebar extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isExpand: false,
+            subIsExpand1: false,
+            subIsExpand2: false
+        }
+    }
+
+    componentDidMount(){
+        if(window.innerWidth < 992)
+        {
+            this.setState({
+                subIsExpand1 : false,
+                subIsExpand2 : false
+            })
+        }
+        else
+        {
+            this.setState({
+                subIsExpand1 : true,
+                subIsExpand2 : true
+            })
+        }
+    }
+
+    onClickMenuHandler(e){
+        e.preventDefault();
+        if(this.state.isExpand)
+            this.setState({
+                isExpand: false
+            });
+        else
+            this.setState({
+                isExpand: true
+            });
+    }
+
+    subMenuOnClickHandler1(){
+        if(this.state.subIsExpand1)
+        this.setState({
+            subIsExpand1: false
+        });
+    else
+        this.setState({
+            subIsExpand1: true
+        });
+    }
+
+    subMenuOnClickHandler2(){
+        if(this.state.subIsExpand2)
+        this.setState({
+            subIsExpand2: false
+        });
+    else
+        this.setState({
+            subIsExpand2: true
+        });
+    }
+
     render() {
         return (
             <aside className="page-sidebar" id="faceted-search-container">
                 <nav>
                     <div id="facetedSearch" className="facetedSearch sidebarBlock">
                 
-                        <a href="#facetedSearch-navList" role="button" className="facetedSearch-toggle toggleLink" data-collapsible="" aria-label="分類" aria-controls="facetedSearch-navList" aria-expanded="false">
+                        <a href="#facetedSearch-navList" role="button" className={this.state.isExpand ? "facetedSearch-toggle toggleLink is-open" : "facetedSearch-toggle toggleLink"} data-collapsible="" aria-label="分類" aria-controls="facetedSearch-navList"  onClick={(e)=>this.onClickMenuHandler(e)}>
                             <span className="facetedSearch-toggle-text">分類</span>
 
                             <span className="facetedSearch-toggle-indicator">
@@ -454,10 +710,10 @@ class Sidebar extends React.Component {
                         </a>
 
 
-                        <div id="facetedSearch-navList" className="facetedSearch-navList blocker-container" aria-hidden="true">
+                        <div id="facetedSearch-navList" className={this.state.isExpand ? "facetedSearch-navList blocker-container is-open" : "facetedSearch-navList blocker-container"} aria-hidden="true">
                             <div className="accordion accordion--navList">
                                 <div className="accordion-block">
-                                    <div className="accordion-navigation toggleLink" role="button" data-collapsible="#facetedSearch-content--categories" aria-label="產品系列" aria-controls="facetedSearch-content--categories" aria-expanded="false">
+                                    <div className={this.state.subIsExpand1 ? "accordion-navigation toggleLink is-open" : "accordion-navigation toggleLink" } role="button" data-collapsible="#facetedSearch-content--categories" aria-label="產品系列" aria-controls="facetedSearch-content--categories" onClick={()=>this.subMenuOnClickHandler1()}>
                                         <h5 className="accordion-title">產品系列</h5>
 
                                         <div className="accordion-navigation-actions">
@@ -469,7 +725,7 @@ class Sidebar extends React.Component {
                                             </svg>
                                         </div>
                                     </div>
-                                    <div id="facetedSearch-content--categories" className="accordion-content" aria-hidden="true">
+                                    <div id="facetedSearch-content--categories" className={this.state.subIsExpand1 ? "accordion-content is-open" : "accordion-content" }aria-hidden="false">
                                         <ul id="facetedSearch-navList--categories" data-facet="categories" className="navList" data-has-more-results="false">
                                             <li className="navList-item">
                                                 <a href="https://olay.com.hk/productline/goldenaura" className="navList-action" title="GOLDEN AURA抗氧酵母青春系列">GOLDEN AURA抗氧酵母青春系列(4)</a>
@@ -492,7 +748,7 @@ class Sidebar extends React.Component {
 
                                 <div className="accordion-block">
                                     <div className="accordion-nav-clear-holder">
-                                        <div className="accordion-navigation toggleLink" role="button" data-collapsible="#facetedSearch-content--product-type" aria-label="肌膚護理" aria-controls="facetedSearch-content--product-type" aria-expanded="false">
+                                        <div className={this.state.subIsExpand2 ? "accordion-navigation toggleLink is-open" : "accordion-navigation toggleLink" }  role="button" data-collapsible="#facetedSearch-content--product-type" aria-label="肌膚護理" aria-controls="facetedSearch-content--product-type" onClick={()=>this.subMenuOnClickHandler2()}>
                                             <h5 className="accordion-title">
                                                 肌膚護理
                                             </h5>
@@ -508,12 +764,12 @@ class Sidebar extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div id="facetedSearch-content--product-type" className="accordion-content" aria-hidden="true">
+                                    <div id="facetedSearch-content--product-type" className={this.state.subIsExpand2 ? "accordion-content is-open" : "accordion-content" } aria-hidden="false">
                                         <ul id="facetedSearch-navList--product-type" data-facet="Product Type" className="navList" data-has-more-results="false">
                                             <li className="navList-item">
                                                 <a href="/productline?_bc_fsnf=1&amp;Product+Type=%E7%88%BD%E8%86%9A" className="navList-action navList-action--checkbox" rel="nofollow" data-faceted-search-facet="">
                                                     爽膚
-                                                        <span>(3)</span>
+                                                        <span>&nbsp;(3)</span>
 
                                                     <span className="navList-action-close" aria-hidden="true">
                                                         <svg className="icon">
@@ -525,7 +781,7 @@ class Sidebar extends React.Component {
                                             <li className="navList-item">
                                                 <a href="/productline?_bc_fsnf=1&amp;Product+Type=%E7%9C%BC%E5%91%A8%E8%AD%B7%E7%90%86" className="navList-action navList-action--checkbox" rel="nofollow" data-faceted-search-facet="">
                                                     眼周護理
-                                                        <span>(1)</span>
+                                                        <span>&nbsp;(1)</span>
 
                                                     <span className="navList-action-close" aria-hidden="true">
                                                         <svg className="icon">
@@ -537,7 +793,7 @@ class Sidebar extends React.Component {
                                             <li className="navList-item">
                                                 <a href="/productline?_bc_fsnf=1&amp;Product+Type=%E7%B2%BE%E8%8F%AF" className="navList-action navList-action--checkbox" rel="nofollow" data-faceted-search-facet="">
                                                     精華
-                                                        <span>(11)</span>
+                                                        <span>&nbsp;(11)</span>
 
                                                     <span className="navList-action-close" aria-hidden="true">
                                                         <svg className="icon">
@@ -549,7 +805,7 @@ class Sidebar extends React.Component {
                                             <li className="navList-item">
                                                 <a href="/productline?_bc_fsnf=1&amp;Product+Type=%E9%98%B2%E6%9B%AC" className="navList-action navList-action--checkbox" rel="nofollow" data-faceted-search-facet="">
                                                     防曬
-                                                        <span>(1)</span>
+                                                        <span>&nbsp;(1)</span>
 
                                                     <span className="navList-action-close" aria-hidden="true">
                                                         <svg className="icon">
@@ -561,7 +817,7 @@ class Sidebar extends React.Component {
                                             <li className="navList-item">
                                                 <a href="/productline?_bc_fsnf=1&amp;Product+Type=%E9%9D%A2%E8%86%9C" className="navList-action navList-action--checkbox" rel="nofollow" data-faceted-search-facet="">
                                                     面膜
-                                                        <span>(1)</span>
+                                                        <span>&nbsp;(1)</span>
 
                                                     <span className="navList-action-close" aria-hidden="true">
                                                         <svg className="icon">
@@ -573,7 +829,7 @@ class Sidebar extends React.Component {
                                             <li className="navList-item">
                                                 <a href="/productline?_bc_fsnf=1&amp;Product+Type=%E9%9D%A2%E9%9C%9C" className="navList-action navList-action--checkbox" rel="nofollow" data-faceted-search-facet="">
                                                     面霜
-                                                        <span>(5)</span>
+                                                        <span>&nbsp;(5)</span>
 
                                                     <span className="navList-action-close" aria-hidden="true">
                                                         <svg className="icon">
@@ -714,6 +970,85 @@ class ItemList extends React.Component {
     }
 }
 
+class Footer extends React.Component {
+    render() {
+        return (
+            <footer className="footer" role="contentinfo">
+                <h2 className="footer-title-sr-only">頁腳開始</h2>
+                <div className="container">
+                    <section className="footer-info">
+                        <article className="footer-info-col footer-info-col--small footer-info-col--logo" data-section-type="footer-webPages">
+                            <a href="https://olay.com.hk/">
+                                <img className="footer-logo-image" src="https://olay.com.hk/content/common/logo-olay-white.png" />
+                            </a>
+                        </article>
+                            <article className="footer-info-col footer-info-col--small footer-info-col--social" data-section-type="footer-webPages">
+                                    <div className="footer-social">
+                                        <h3 className="footer-info-heading">關注我們</h3>
+                                            <ul className="socialLinks socialLinks--alt">
+                                                <li className="socialLinks-item">
+                                                    <a className="icon icon--facebook" href="https://www.facebook.com/pg.olay.hk " target="_blank" rel="noopener">
+                                                        <svg><use xlinkHref="#icon-facebook"></use></svg>
+                                                    </a>
+                                                </li>
+                                                <li className="socialLinks-item">
+                                                    <a className="icon icon--youtube" href="https://www.youtube.com/channel/UCMyzVuVIy5r_bvkCojLQ4dw " target="_blank" rel="noopener">
+                                                        <svg><use xlinkHref="#icon-youtube"></use></svg>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                    </div>
+                            </article>
+                                    <article className="footer-info-col footer-info-col--small footer-info-col--pages1" data-section-type="footer-webPages">
+                                            <h3 className="footer-info-heading js-footer-info-heading">客戶服務</h3>
+                                            <ul className="footer-info-list">
+                                                    <li>
+                                                        <a href="https://olay.com.hk/orderstatus">訂單狀態</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="https://olay.com.hk/exchange-refund-policy">退貨 / 換貨政策</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="https://olay.com.hk/delivery">送貨</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="https://olay.com.hk/faq">常見問題 </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="https://olay.com.hk/purchase-policy">產品購買須知及注意事項</a>
+                                                    </li>
+                                            </ul>
+                                    </article>
+                                    <article className="footer-info-col footer-info-col--small footer-info-col--pages2" data-section-type="footer-webPages">
+                                            <h3 className="footer-info-heading">
+                                                <a href="https://www.pg.com/privacy/chineseT/privacy_statement.shtml " target="_blank">隱私權</a>
+                                            </h3>
+                                            <div className="footer-info-list"></div>
+                                    </article>
+                                    <article className="footer-info-col footer-info-col--small footer-info-col--pages3" data-section-type="footer-webPages">
+                                            <h3 className="footer-info-heading">
+                                                <a href="https://olay.com.hk/contactus" target="_blank">聯繫我們</a>
+                                            </h3>
+                                            <div className="footer-info-list"></div>
+                                    </article>
+                    </section>
+                        <div className="footer-copyright">
+                            <p className="powered-by">Copyright © 2021 OLAY <span className="rights">All rights reserved.</span> </p>
+                            <ul className="footer-bottom-list">
+                                                <li>
+                                                    <a href="https://www.pg.com/privacy/chineseT/privacy_statement.shtml#iba" target="_blank">AdChoices<img className="AdChoices-image" src="https://cdn11.bigcommerce.com/s-f8et57gva1/stencil/1a81d1d0-b00e-0139-b736-1a0fc5a766bd/e/6d19d740-3078-0139-7b17-0242ac110007/img/AdChoices.png" /></a>
+                                                </li>
+                                            <li className="and-item">
+                                                        <a href="https://www.pg.com/zh_HK/terms_conditions/index.shtml" target="_blank">條款</a>
+                                                        <a href="https://www.pg.com/zh_HK/terms_conditions/index.shtml" target="_blank">協議</a>
+                                            </li>
+                            </ul>
+                        </div>
+                </div>
+            </footer>
+        );
+    }
+}
 
 // class Home extends React.Component {
 //     render() {
