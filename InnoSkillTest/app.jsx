@@ -262,9 +262,12 @@ class Header extends React.Component {
                 loginIsExpand: false
             })
         else
+        {
             this.setState({
                 loginIsExpand: true
             })
+        }
+
 
     }
 
@@ -501,7 +504,7 @@ class Header extends React.Component {
                                     </div>
                                 </div>
                             </li>
-                            <li className="navUser-item navUser-item--account"  tabIndex="0" onClick={this.loginOnClickHandler} onBlur={()=>this.setState({loginIsExpand: false})}>
+                            <li className="navUser-item navUser-item--account" tabIndex="0" onClick={this.loginOnClickHandler}  onBlur={() => this.setState({loginIsExpand: false})}>
                                     <a className={this.state.loginIsExpand ? "navUser-action is-open" : "navUser-action"} data-dropdown="account-dropdown" data-options="align:right"  aria-label="購物車沒有貨品"   >
                                         <span className="icon" aria-hidden="true">
                                             <svg><use xlinkHref="#icon-user"></use></svg>
@@ -509,8 +512,8 @@ class Header extends React.Component {
                                         登入
                                     </a>
 
-                                <div className={this.state.loginIsExpand ? "dropdown-menu dropdown-menu--login is-open f-open-dropdown" : "dropdown-menu dropdown-menu--login"} id="account-dropdown" data-dropdown-content="" aria-hidden="true" style={this.state.loginIsExpand ? {position:"absolute", left: "-169.203px",top:"46.9844px"} : {position: "absolute",left:"-99999px", top: "46.9844px"}} >
-                                        <form className="form custom-login-form" action="/login.php?action=check_login" method="post">
+                                <div className={this.state.loginIsExpand ? "dropdown-menu dropdown-menu--login is-open f-open-dropdown" : "dropdown-menu dropdown-menu--login"} tabIndex="0" id="account-dropdown" data-dropdown-content="" aria-hidden="true" style={this.state.loginIsExpand ? {position:"absolute", left: "-169.203px",top:"46.9844px"} : {position: "absolute",left:"-99999px", top: "46.9844px"}} >
+                                        <form className="form custom-login-form" action="/login.php?action=check_login" method="post" >
                                             <legend className="form-label">登入您的OLAY帳戶<a href="/login.php?action=create_account" className="registration-link" data-action-detail="23989KDKHWE">註冊</a></legend>
                                             
                                             
